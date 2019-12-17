@@ -359,9 +359,9 @@ export class Message {
 
   setContent(content: any): void {
     if (typeof content === "string") {
-      this.content = new Buffer(content);
+      this.content = Buffer.from(content);
     } else if (!(content instanceof Buffer)) {
-      this.content = new Buffer(JSON.stringify(content));
+      this.content = Buffer.from(JSON.stringify(content));
       this.properties.contentType = "application/json";
     } else {
       this.content = content;
@@ -506,9 +506,9 @@ export class Exchange {
    */
   publish(content: any, routingKey = "", options: any = {}): void {
     if (typeof content === "string") {
-      content = new Buffer(content);
+      content = Buffer.from(content);
     } else if (!(content instanceof Buffer)) {
-      content = new Buffer(JSON.stringify(content));
+      content = Buffer.from(JSON.stringify(content));
       options.contentType = options.contentType || "application/json";
     }
     this.initialized.then(() => {
@@ -793,9 +793,9 @@ export class Queue {
 
   static _packMessageContent(content: any, options: any): Buffer {
     if (typeof content === "string") {
-      content = new Buffer(content);
+      content = Buffer.from(content);
     } else if (!(content instanceof Buffer)) {
-      content = new Buffer(JSON.stringify(content));
+      content = Buffer.from(JSON.stringify(content));
       options.contentType = "application/json";
     }
     return content;
